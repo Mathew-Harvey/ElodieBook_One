@@ -19,9 +19,11 @@ This project is an interactive digital storybook titled **"Snake Stew"** by **El
 - [Acknowledgments](#acknowledgments)
 
 ---
-
+## This was the Original Story 
+![DesignPatternsDemo](/Images/OGStory) 
 ---
 
+---
 ## LINK TO BOOK
 👉 **[Click here to view the interactive storybook online.](https://mathew-harvey.github.io/ElodieBook_One/)**
 

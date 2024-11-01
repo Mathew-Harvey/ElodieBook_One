@@ -20,6 +20,12 @@ This project is an interactive digital storybook titled **"Snake Stew"** by **El
 
 ---
 
+---
+
+## LINK TO BOOK
+👉 **[Click here to view the interactive storybook online.](https://mathew-harvey.github.io/ElodieBook_One/)**
+
+---
 ## Overview
 
 "Snake Stew" is a children's story created by Elodie Harvey. This project transforms her handwritten story and illustrations into an interactive digital book that can be viewed in a web browser. The interactive book features:

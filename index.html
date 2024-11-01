@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(45deg, #8b5e3c, #6b4423);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'arial', sans-serif;
             padding: 20px;
             overflow-x: hidden;
         }
@@ -49,8 +49,7 @@
 
         .book.opened {
             width: 100%;
-            transform: translateX(-1%);
-            /* Changed from 'none' to -25% to center the doubled width */
+            transform: translateX(-25%);
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2),
                 0 0 40px rgba(0, 0, 0, 0.1);
         }
@@ -71,390 +70,342 @@
             box-shadow:
                 0 4px 8px rgba(0, 0, 0, 0.1),
                 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
 
-            backface-visib .page.disabled {
-                pointer-events: none;
+        .page.turning {
+            transition: transform 0.5s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-front,
+        .page-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: min(5vw, 40px);
+            backface-visibility: hidden;
+            background: white;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+        }
+
+        .spine {
+            position: absolute;
+            left: -20px;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(315deg, #00796b, #1976d2, #009688, #0288d1);
+            transform: rotateY(90deg) translateZ(-20px);
+            transform-origin: right;
+            z-index: 2;
+            border-radius: 2px 0 0 2px;
+            box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cover-page {
+            background: linear-gradient(315deg, #00796b, #1976d2, #009688, #0288d1);
+            color: white;
+            border-radius: 2px;
+        }
+
+        .page.turned {
+            transform: rotateY(-180deg);
+        }
+
+        .turn-area {
+            position: absolute;
+            width: 20%;
+            height: 100%;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .book.opened .turn-area {
+            opacity: 1;
+        }
+
+        .turn-area-right {
+            right: -2%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05));
+        }
+
+        .turn-area-left {
+            left: 0;
+            background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.05));
+        }
+
+        .cover-title {
+            font-size: min(8vw, 48px);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .cover-author {
+            font-size: min(4vw, 24px);
+            margin-top: 40px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .cover-illustrator {
+            font-size: min(3vw, 18px);
+            text-align: center;
+        }
+
+        .story-text {
+            font-size: clamp(14px, 3vw, 24px);
+            line-height: 1.6;
+            color: #2d3748;
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            display: block;
+            margin: 20px 0;
+        }
+
+        #coverImg {
+            width: 100%;
+            height: min(50vw, 400px);
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: clamp(12px, 2.5vw, 14px);
+            color: #666;
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Tablets and smaller laptops */
+        @media (max-width: 1024px) {
+            .book-container {
+                width: min(75vw, calc(75vh / 1.4142));
+                height: calc(min(75vw, calc(75vh / 1.4142)) * 1.4142);
+            }
+
+            .story-text {
+                font-size: clamp(14px, 2.5vw, 20px);
+            }
+
+            .turn-area {
+                width: 25%;
             }
         }
-            /* Enhance page turning visual */
-            .page.turning {
-                transition: transform 0.5s ease;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+        /* Mobile devices */
+        @media (max-width: 768px) {
+            .book-container {
+                width: min(85vw, calc(80vh / 1.4142));
+                height: calc(min(85vw, calc(80vh / 1.4142)) * 1.4142);
+            }
+
+            .book {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .book.opened {
+                transform: translateX(-25%);
+            }
+
+            .spine {
+                left: -15px;
+                width: 30px;
             }
 
             .page-front,
             .page-back {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                padding: min(5vw, 40px);
-                backface-visibility: hidden;
-                background: white;
-                border-radius: 2px;
-                overflow: hidden;
-            }
-
-            .page-back {
-                transform: rotateY(180deg);
-            }
-
-            .spine {
-                position: absolute;
-                left: -20px;
-                /* Half spine width */
-                width: 40px;
-                height: 100%;
-                background: linear-gradient(315deg, #00796b, #1976d2, #009688, #0288d1);                transform: rotateY(90deg) translateZ(-20px);
-                transform-origin: right;
-                z-index: 2;
-                border-radius: 2px 0 0 2px;
-                box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1);
-            }
-
-            .cover-page {
-                background: linear-gradient(315deg, #00796b, #1976d2, #009688, #0288d1);                color: white;
-                border-radius: 2px;
-            }
-
-            /* Adjust page turning mechanics */
-            .page.turned {
-                transform: rotateY(-180deg);
-            }
-
-            .turn-area {
-                position: absolute;
-                width: 20%;
-                height: 100%;
-                top: 0;
-                z-index: 10;
-                cursor: pointer;
-                opacity: 0;
-                /* Hide by default */
-                transition: opacity 0.3s ease;
-            }
-
-            .book.opened .turn-area {
-                opacity: 1;
-                /* Show when book is opened */
-            }
-
-
-            .turn-area-right {
-                right: 0;
-                background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05));
-            }
-
-            .turn-area-left {
-                left: 0;
-                background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.05));
-            }
-
-            .turn-indicator {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 40px;
-                height: 40px;
-                opacity: 0;
-                transition: opacity 0.3s;
-                pointer-events: none;
-            }
-
-            .turn-area-right .turn-indicator {
-                right: 20px;
-                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
-            }
-
-            .turn-area-left .turn-indicator {
-                left: 20px;
-                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
-            }
-
-            .turn-area:hover .turn-indicator {
-                opacity: 0.6;
-            }
-
-
-            .cover-title {
-                font-size: min(8vw, 48px);
-                margin: 20px 0;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-                text-align: center;
-            }
-
-            .cover-author {
-                font-size: min(4vw, 24px);
-                margin-top: 40px;
-                font-style: italic;
-                text-align: center;
-            }
-
-            .cover-illustrator {
-                font-size: min(3vw, 18px);
-                text-align: center;
+                padding: 15px;
             }
 
             .story-text {
-                font-size: min(4vw, 24px);
-                line-height: 1.6;
-                color: #2d3748;
-                margin: 20px 0;
+                font-size: clamp(14px, 2vw, 16px);
             }
 
-            img {
-                width: 100%;
-                height: min(50vw, 400px);
-                object-fit: cover;
-                border-radius: 10px;
-                margin: 20px 0;
+            .turn-area {
+                width: 30%;
+            }
+
+            .cover-title {
+                font-size: min(6vw, 36px);
+            }
+
+            .cover-author {
+                font-size: min(4vw, 20px);
+            }
+
+            .cover-illustrator {
+                font-size: min(3vw, 16px);
             }
 
             .page-number {
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
-                font-size: min(2.5vw, 14px);
-                color: #666;
+                font-size: clamp(10px, 2vw, 12px);
+            }
+        }
+
+        /* Fold phones and small devices */
+        @media (max-width: 480px) {
+            .book-container {
+                width: min(90vw, calc(85vh / 1.4142));
+                height: calc(min(90vw, calc(85vh / 1.4142)) * 1.4142);
             }
 
-            .turned {
-                transform: rotateY(-180deg);
+            .book.opened {
+                width: 100%;
+                left: 0;
+                transform: translateX(0);
             }
 
-            @keyframes pulse {
-                0% {
-                    transform: translateX(0);
-                }
-
-                50% {
-                    transform: translateX(10px);
-                }
-
-                100% {
-                    transform: translateX(0);
-                }
+            .spine {
+                left: -10px;
+                width: 20px;
             }
 
-            .initial-hint {
-                animation: pulse 1.5s infinite;
+            .page-front,
+            .page-back {
+                padding: 12px;
             }
 
-            /* Base accessibility styles - keep these outside media queries */
-            .sr-only {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                border: 0;
+            .story-text {
+                font-size: clamp(12px, 2vw, 14px);
             }
 
-            .turn-area:focus {
-                outline: 2px solid #4299e1;
-                outline-offset: -2px;
+            .turn-area {
+                width: 35%;
             }
 
-            .turn-area:focus:not(:focus-visible) {
-                outline: none;
+            .cover-title {
+                font-size: min(7vw, 32px);
             }
 
-            /* Tablets and smaller laptops */
-            @media (max-width: 1024px) {
-                .book-container {
-                    width: min(70vw, calc(75vh / 1.4142));
-                    height: calc(min(70vw, calc(75vh / 1.4142)) * 1.4142);
-                }
-
-                .story-text {
-                    font-size: min(3vw, 20px);
-                    line-height: 1.5;
-                }
-
-                .turn-area {
-                    width: 25%;
-                    /* Slightly larger touch target */
-                }
+            .cover-author {
+                font-size: min(5vw, 18px);
             }
 
-            /* Mobile devices */
-            @media (max-width: 768px) {
-                .book-container {
-                    width: min(85vw, calc(80vh / 1.4142));
-                    height: calc(min(85vw, calc(80vh / 1.4142)) * 1.4142);
-                }
-
-                .book {
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-
-                .book.opened {
-                    transform: translateX(-50%);
-                }
-
-                .spine {
-                    left: -15px;
-                    width: 30px;
-                }
-
-                .page-front,
-                .page-back {
-                    padding: 15px;
-                }
-
-                .story-text {
-                    font-size: 16px;
-                    line-height: 1.4;
-                }
-
-                .turn-area {
-                    width: 30%;
-                }
-
-                .cover-title {
-                    font-size: min(6vw, 36px);
-                }
-
-                .cover-author {
-                    font-size: min(4vw, 20px);
-                }
-
-                .cover-illustrator {
-                    font-size: min(3vw, 16px);
-                }
+            .cover-illustrator {
+                font-size: min(4vw, 14px);
             }
 
-            /* Fold phones and small devices */
-            @media (max-width: 480px) {
-                .book-container {
-                    width: min(90vw, calc(85vh / 1.4142));
-                    height: calc(min(90vw, calc(85vh / 1.4142)) * 1.4142);
-                }
+            .page-number {
+                font-size: 12px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
 
-                .book.opened {
-                    width: 200%;
-                }
-
-                .spine {
-                    left: -10px;
-                    width: 20px;
-                }
-
-                .page-front,
-                .page-back {
-                    padding: 12px;
-                }
-
-                .story-text {
-                    font-size: 14px;
-                    line-height: 1.3;
-                }
-
-                .turn-area {
-                    width: 35%;
-                    /* Even larger touch target for small screens */
-                }
-
-                .cover-title {
-                    font-size: min(7vw, 32px);
-                }
-
-                .cover-author {
-                    font-size: min(5vw, 18px);
-                }
-
-                .cover-illustrator {
-                    font-size: min(4vw, 14px);
-                }
-
-                .page-number {
-                    font-size: 12px;
-                    bottom: 10px;
-                    right: 10px;
-                }
+        /* Landscape orientation */
+        @media (max-height: 480px) and (orientation: landscape) {
+            .book-container {
+                width: min(70vw, calc(90vh / 1.4142));
+                height: calc(min(70vw, calc(90vh / 1.4142)) * 1.4142);
             }
 
-            /* Ensure proper display in landscape orientation */
-            @media (max-height: 480px) and (orientation: landscape) {
-                .book-container {
-                    width: min(50vw, calc(90vh / 1.4142));
-                    height: calc(min(50vw, calc(90vh / 1.4142)) * 1.4142);
-                }
-
-                .page-front,
-                .page-back {
-                    padding: 10px;
-                }
-
-                .story-text {
-                    font-size: 12px;
-                    line-height: 1.2;
-                    margin: 10px 0;
-                }
-
-                img {
-                    height: min(30vw, 200px);
-                    margin: 10px 0;
-                }
+            .page-front,
+            .page-back {
+                padding: 10px;
             }
+
+            .story-text {
+                font-size: clamp(12px, 2vh, 14px);
+            }
+
+            img {
+                height: clamp(100px, 40vh, 200px);
+            }
+        }
     </style>
-</head>
+            </head>
 
 <body>
     <div class="book-container" aria-label="Interactive storybook: Snake Stew">
         <div class="book">
             <div class="spine" aria-hidden="true"></div>
-    
+
             <!-- Cover -->
             <div class="page" id="cover">
                 <div class="page-front cover-page">
                     <h1 class="cover-title">Snake Stew</h1>
-                    <img src="Images\Cover.jpg" alt="A magical forest scene with an owl cooking" />
+                    <img src="Images\Cover.jpg" id="coverImg" alt="A magical forest scene with an owl cooking" />
                     <p class="cover-author">Written by Elodie Harvey</p>
                     <p class="cover-illustrator">Illustrated by Dali AI</p>
                 </div>
                 <div class="page-back">
                     <img src="Images/pageOne.jpg" alt="A clever owl in the forest" />
-                    <p class="story-text">Many moons ago, there was a clever owl who lived in a deep, dark forest. One day, he caught many snakes and decided to make snake stew.</p>
+                    <p class="story-text">Many moons ago, there was a clever owl who lived in a deep, dark forest. One
+                        day, he caught many snakes and decided to make snake stew.</p>
                     <span class="page-number" aria-label="Page 1">1</span>
                 </div>
             </div>
-    
+
             <!-- Page 2-3 -->
             <div class="page">
                 <div class="page-front">
                     <img src="Images/pageTwo.jpg" alt="A fish jumping from a puddle" />
-                    <p class="story-text">First, a fish swam out of a puddle, like a string ray in a panic, and said, "The best thing to add to snake stew is shrimp!"</p>
+                    <p class="story-text">First, a fish swam out of a puddle, like a string ray in a panic, and said,
+                        "The best thing to add to snake stew is shrimp!"</p>
                     <span class="page-number" aria-label="Page 2">2</span>
                 </div>
                 <div class="page-back">
                     <img src="Images/pageThree.jpg" alt="A vulture flying like a stingray" />
-                    <p class="story-text">Next, a vulture flew out of his magnifying barrel, swooping like a stingray, and suggested, "Snake eggs are the best ingredient!"</p>
+                    <p class="story-text">Next, a vulture flew out of his magnifying barrel, swooping like a stingray,
+                        and suggested, "Snake eggs are the best ingredient!"</p>
                     <span class="page-number" aria-label="Page 3">3</span>
                 </div>
             </div>
-    
+
             <!-- Page 4-5 -->
             <div class="page">
                 <div class="page-front">
                     <img src="Images/pageFour.jpg" alt="An octopus in an ink barrel" />
-                    <p class="story-text">After that, an octopus swam out of an ink barrel and said, "The best thing for snake stew is glowworms that glow in the dark!"</p>
+                    <p class="story-text">After that, an octopus swam out of an ink barrel and said, "The best thing for
+                        snake stew is glowworms that glow in the dark!"</p>
                     <span class="page-number" aria-label="Page 4">4</span>
                 </div>
                 <div class="page-back">
                     <img src="Images/pageFive.jpg" alt="Animals gathering around a glowing pot" />
-                    <p class="story-text">Finally, the clever owl thanked all his forest friends for their suggestions. He mixed together the snakes, shrimp, snake eggs, and glowworms in his biggest cooking pot.</p>
+                    <p class="story-text">Finally, the clever owl thanked all his forest friends for their suggestions.
+                        He mixed together the snakes, shrimp, snake eggs, and glowworms in his biggest cooking pot.</p>
                     <span class="page-number" aria-label="Page 5">5</span>
                 </div>
             </div>
-    
+
             <!-- Final Pages -->
             <div class="page">
                 <div class="page-front">
                     <img src="Images/pageSix.jpg" alt="A magical glowing forest" />
-                    <p class="story-text">As the stew simmered, it began to glow with magical colors, lighting up the dark forest like a rainbow. All the animals gathered around to taste the magical snake stew, and from that day forward, it became the most famous recipe in the entire forest.</p>
+                    <p class="story-text">As the stew simmered, it began to glow with magical colors, lighting up the
+                        dark forest like a rainbow. All the animals gathered around to taste the magical snake stew, and
+                        from that day forward, it became the most famous recipe in the entire forest.</p>
                     <span class="page-number" aria-label="Page 6">6</span>
                 </div>
                 <div class="page-back">
@@ -467,7 +418,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const book = document.querySelector('.book');

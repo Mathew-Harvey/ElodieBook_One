@@ -7,20 +7,28 @@ This project is an interactive digital storybook titled **"Snake Stew"** by **El
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Project Structure](#project-structure)
-- [Process Overview](#process-overview)
-  - [1. Image Generation](#1-image-generation)
-  - [2. Text Digitization](#2-text-digitization)
-  - [3. Building the Interactive Book](#3-building-the-interactive-book)
-- [How to Run the Project](#how-to-run-the-project)
-- [Customization](#customization)
-- [Accessibility Considerations](#accessibility-considerations)
-- [Acknowledgments](#acknowledgments)
+- [Snake Stew - Interactive Storybook](#snake-stew---interactive-storybook)
+  - [Table of Contents](#table-of-contents)
+  - [This was the Original Story](#this-was-the-original-story)
+  - [](#)
+  - [LINK TO BOOK](#link-to-book)
+  - [Overview](#overview)
+  - [Project Structure](#project-structure)
+  - [Process Overview](#process-overview)
+    - [1. Image Generation](#1-image-generation)
+    - [2. Text Digitization](#2-text-digitization)
+    - [3. Building the Interactive Book](#3-building-the-interactive-book)
+      - [**HTML Structure**](#html-structure)
+      - [**CSS Styling**](#css-styling)
+      - [**JavaScript Functionality**](#javascript-functionality)
+  - [How to Run the Project](#how-to-run-the-project)
+  - [Customization](#customization)
+  - [Accessibility Considerations](#accessibility-considerations)
+  - [Acknowledgments](#acknowledgments)
 
 ---
 ## This was the Original Story 
-![DesignPatternsDemo](/Images/OGStory) 
+![Hand Written Story](/Images/OGStory.jpg) 
 ---
 
 ---

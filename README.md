@@ -1,4 +1,4 @@
-```markdown
+
 # Snake Stew - Interactive Storybook
 
 This project is an interactive digital storybook titled **"Snake Stew"** by **Elodie Harvey**, with illustrations generated using AI tools. The story was handwritten by Elodie and digitized using AI assistance. This README file explains the process of creating the book, including image generation, text digitization, and building the interactive web application.
@@ -181,4 +181,3 @@ This project includes several features to enhance accessibility:
 ---
 
 *Thank you for exploring the "Snake Stew" interactive storybook. We hope you enjoy reading it as much as we enjoyed creating it!*
-```
